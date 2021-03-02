@@ -3,7 +3,10 @@ let input = [
   'Оце,ните пожа,луйста .сер.ви.с о.т 1(ого) до 10(ти). 10().',
 ];
 
-console.log('hello');
+let arrFromInput = [];
+let outputArray = [];
+let secondaryArray = [];
+let result = [];
 
 function cleanDotComma(str) {
   let x;
@@ -11,33 +14,47 @@ function cleanDotComma(str) {
   return x;
 }
 
-console.log(cleanDotComma(input[1]));
-
 let clean = cleanDotComma(input[1]);
-console.log(clean);
 
-// function findDigits(str) {
-//   let ar = [];
-//   let tempAr = str.split(' ');
-//   for (let i=0; i < tempAr.length; i++) {
-//     if (isNaN(parseInt(tempAr[i]))){
-//       continue;
-//     } else {ar.push(parseInt(tempAr[i]))}
-//   }
-//   return ar;
-// }
-
-findDigits = (str) => {
-  let arr = str.split(' ').map(v => {
-    if (isNaN(parseInt(v)){
+function findDigits(str) {
+  let tmpArr = [];
+  arrFromInput = str.split(' ');
+  for (let i = 0; i < arrFromInput.length; i++) {
+    if (isNaN(parseInt(arrFromInput[i]))) {
+      tmpArr.push(0);
       continue;
-    } else {return arr.push(parseInt(v))}
-  })
-  return arr;
+    } else {
+      tmpArr.push(parseInt(arrFromInput[i]));
+    }
+  }
+  return tmpArr;
 }
 
-console.log(findDigits(clean));
+outputArray = findDigits(clean);
 
-let y = 'bla';
+console.log(arrFromInput);
+console.log(outputArray);
 
-console.log(isNaN(y));
+function final(arr1, arr2) {
+  // TODO: Add counter to catch 'from', 'to', 'mark'.
+  let counter = 0;
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] == 0) {
+      continue;
+    } else {
+      if (arr1[i] > 0) {
+        switch (counter) {
+          case counter == 0:
+            if (arr2[i] - 1 == 'от') {
+              result['text'] = arr1[i];
+              counter += 1;
+            }
+        }
+      }
+    }
+  }
+}
+
+final(arrFromInput, outputArray);
+
+console.log(final(arrFromInput, outputArray));
