@@ -5,7 +5,6 @@ let input = [
 
 let arrFromInput = [];
 let outputArray = [];
-let secondaryArray = [];
 let result = [];
 
 function cleanDotComma(str) {
@@ -32,29 +31,47 @@ function findDigits(str) {
 
 outputArray = findDigits(clean);
 
+console.log(clean);
 console.log(arrFromInput);
 console.log(outputArray);
 
-function final(arr1, arr2) {
-  // TODO: Add counter to catch 'from', 'to', 'mark'.
+function final(arr1, arr2, str, arrFinal) {
   let counter = 0;
-  for (let i = 0; i < arr1.length; i++) {
-    if (arr1[i] == 0) {
+  for (let i = 0; i < arr2.length; i++) {
+    if (arr2[i] == 0) {
       continue;
     } else {
-      if (arr1[i] > 0) {
+      if (arr2[i] >= 1) {
         switch (counter) {
-          case counter == 0:
-            if (arr2[i] - 1 == 'от') {
-              result['text'] = arr1[i];
+          case 0:
+            if (arr1[i - 1] == 'от') {
+              arrFinal['text'] = '>' + parseInt(arr1[i]);
+              arrFinal['startPos'] = str.indexOf(arr1[i]);
+              arrFinal['length'] = arr1[i].length;
               counter += 1;
             }
+            break;
+          case 1:
+            if (arr1[i - 1] == 'до') {
+              arrFinal['text'] = '<' + parseInt(arr1[i]);
+              arrFinal['startPos'] = str.indexOf(arr1[i]);
+              arrFinal['length'] = arr1[i].length;
+              counter += 1;
+            }
+            break;
+          case 2:
+            arrFinal['text'] = parseInt(arr1[i]);
+            arrFinal['startPos'] = str.indexOf(arr1[i]);
+            arrFinal['length'] = arr1[i].length;
+            counter += 1;
+            break;
+          default:
+            console.log('Somewhere error happen!');
         }
       }
     }
   }
+  return arrFinal;
 }
 
-final(arrFromInput, outputArray);
-
-console.log(final(arrFromInput, outputArray));
+final(arrFromInput, outputArray, clean, result);
