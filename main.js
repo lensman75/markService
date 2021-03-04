@@ -37,6 +37,7 @@ console.log(outputArray);
 
 function final(arr1, arr2, str, arrFinal) {
   let counter = 0;
+  let obj = {};
   for (let i = 0; i < arr2.length; i++) {
     if (arr2[i] == 0) {
       continue;
@@ -45,24 +46,30 @@ function final(arr1, arr2, str, arrFinal) {
         switch (counter) {
           case 0:
             if (arr1[i - 1] == 'от') {
-              arrFinal['text'] = '>' + parseInt(arr1[i]);
-              arrFinal['startPos'] = str.indexOf(arr1[i]);
-              arrFinal['length'] = arr1[i].length;
+              obj['text'] = '>' + parseInt(arr1[i]); //?
+              obj['startPos'] = str.indexOf(arr1[i]);
+              obj['length'] = arr1[i].length;
+              arrFinal.push(obj); //?
+              obj = {};
               counter += 1;
             }
             break;
           case 1:
             if (arr1[i - 1] == 'до') {
-              arrFinal['text'] = '<' + parseInt(arr1[i]);
-              arrFinal['startPos'] = str.indexOf(arr1[i]);
-              arrFinal['length'] = arr1[i].length;
+              obj['text'] = '<' + parseInt(arr1[i]);
+              obj['startPos'] = str.indexOf(arr1[i]);
+              obj['length'] = arr1[i].length;
+              arrFinal.push(obj);
+              obj = {};
               counter += 1;
             }
             break;
           case 2:
-            arrFinal['text'] = parseInt(arr1[i]);
-            arrFinal['startPos'] = str.indexOf(arr1[i]);
-            arrFinal['length'] = arr1[i].length;
+            obj['text'] = parseInt(arr1[i]);
+            obj['startPos'] = str.indexOf(arr1[i]);
+            obj['length'] = arr1[i].length;
+            arrFinal.push(obj);
+            obj = {};
             counter += 1;
             break;
           default:
@@ -74,4 +81,4 @@ function final(arr1, arr2, str, arrFinal) {
   return arrFinal;
 }
 
-final(arrFromInput, outputArray, clean, result);
+final(arrFromInput, outputArray, clean, result); //?
