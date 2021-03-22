@@ -1,7 +1,4 @@
-let input = [
-  'Оцените пожалуйста сервис от 1(ого) до 10(ти). 10()',
-  'Оце,ните пожа,луйста .сер.ви.с о.т 1(ого) до 9(ти). 8().',
-];
+let str = 'Оцените пожалуйста сервис от 1(ого) до 10(ти). 10()';
 
 function cleanDotComma(str) {
   let x;
@@ -9,7 +6,11 @@ function cleanDotComma(str) {
   return x;
 }
 
-let tt = cleanDotComma(input[1]);
+let test = cleanDotComma(str);
+
+function convToArray(str) {
+  return str.split(' ');
+}
 
 function createObject(word) {
   let obj = {};
@@ -44,6 +45,8 @@ function createObject(word) {
       obj.Num = parseInt(word);
       obj.Prefix = undefined;
       obj.TemporalCase = 'nominative';
+    } else {
+      return;
     }
   }
   return obj;
@@ -56,31 +59,16 @@ function isEmpty(obj) {
   return true;
 }
 
-let ttt = tt.split(' ');
-
-let ar = [];
-for (let i = 0; i < ttt.length; i++) {
-  ar.push(createObject(ttt[i]));
-}
-ar;
-ar.length;
-for (let i = ar.length - 1; i >= 0; i--) {
-  if (isEmpty(ar[i])) {
-    ar.splice(i, 1);
+function final(arr) {
+  let finArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (isEmpty(createObject(arr[i])) == true) {
+      continue;
+    } else {
+      finArr.push(createObject(arr[i]));
+    }
   }
-}
-ar.length; //?
-
-console.log(ar);
-
-function convert(inp) {
-  let arr = [];
-  for (let i = 0; i < inp.split(' ').length; i++) {
-    arr.push(inp.split(' ').map((v) => createObject(v)));
-  }
-  return arr;
+  return finArr;
 }
 
-// console.log(convert(cleanDotComma(input[1])));
-
-let fin = convert(cleanDotComma(input[1]));
+console.log(final(convToArray(test)));
